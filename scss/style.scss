@@ -9,4 +9,529 @@ font-family: 'Lato', sans-serif;
 font-family: 'Montserrat', sans-serif;
 }
 
+@mixin start-button{
+    margin: 0;
+    padding: 20px 16px;
+    font-size: 16px;
+    @include font-mont;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block; //Кнопка выполенна ссылкой, а ссылка инлайновая, а не блочная.
+}
+
 // ==== /Mixins ====
+
+// === Common ===
+*{
+    box-sizing: border-box;
+}
+
+body{
+    width: auto;
+    height: auto;
+    color: #414141;
+}
+
+.section-outer{}
+.section-inner{
+    width: 1180px;
+    margin: 0 auto;
+}
+
+.desription-item{ // вынесли общие свойства текста в одну переменную и пременяем там где нужно
+    &__icon{
+        margin-bottom: 20px;
+    }
+    &__title{
+        margin-bottom: 14px;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 21px;
+    }
+    &__text{
+        font-size: 16px;
+        line-height: 28px;
+        color: #6C6C6C;
+        font-weight: 300;
+            }    
+}
+
+
+.btn-main{
+    @include start-button;
+    border: none;
+    background: linear-gradient(to right, #fe985b, #fe4fa7);
+    color: #ffffff;
+
+    &:hover{
+        background: linear-gradient(to right, #fe4fa7, #fe985b); //при наведении поменяет цвета градиента местами
+    }
+    }
+
+.btn-secondary{
+    @include start-button;
+    border: 1px solid #979797;
+    background: #ffffff;
+    color: #414141;
+
+    &:hover{
+        background-color:  #fe4fa7;
+        color: #ffffff;
+        transition: .2s;
+    }
+    }
+
+.btn-free{
+    @include start-button;
+    border: none;
+    background: #ffffff;
+    color: #414141;
+}    
+
+
+// === /Common ===
+
+// ==== /header ====
+
+
+.section-header{
+    color: #ffffff;
+    background: url('../img/Bitmap.png') no-repeat 50% 50%; // 50% 50% - to the centre
+    background-size: cover; // картинка растянется
+    position: relative; // для того, что бы затемнение кратинки легло идеально под position: absolute;
+    
+    .section-inner{
+        height: 100vh; //вытягиваем div по высоте окна браузера
+        position: relative;
+        z-index: 10; //поднимаем текст и форму выше чем затемнения
+        display: flex; // для вертикальности текста внутри  блока
+        flex-direction: column;
+    }
+
+    &::before{
+        content: '';
+        position: absolute; //для накладывания ровно поверх картинки
+        z-index: 5; // поднимаем затемнение выше чем картинка
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0; // для того что бы растянуть
+        background-color: rgba(20,39,41, .6);
+    }
+    
+    &-logo{
+        font-weight: bold;
+        font-size: 24px;
+        flex-shrink: 1;
+        padding-top: 35px;
+    }
+    &-content{
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+    }
+    &-wrapper{
+        margin: 0 auto;
+        &__title{
+            text-align: center;
+            font-weight: bold;
+            font-size: 55px;
+            line-height: 60px;
+            margin-bottom: 18px;
+        }
+        &__subtitle{
+            @include font-mont; // применяем миксин на шрифт
+            text-align: center;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 32px;
+            width: 70%;
+            margin: 0 auto 44px;
+        }
+        &__form{
+            display: flex;
+
+            &-input{
+                flex: 1; 
+                padding-right: 40px;
+                input{
+                    margin: 0;
+                    padding: 20px 16px;
+                    border: none;
+                    background: rgba(255,255,255, .25);
+                    color: #ffffff;
+                    font-size: 16px;
+                    border-radius: 4px;
+                    width: 100%;
+                    transition: .2s;
+                    
+
+                    &::placeholder{
+                        color: #ffffff;
+                    }
+
+                    &:hover{
+                        background: rgba(255,255,255, .5); //при наведении изменит прозрачность
+                        
+                    }
+
+                }
+            }
+        }
+    }
+}
+
+// section-promo properties
+
+.section-promo{
+    padding-top: 120px;
+    padding-bottom: 90px;
+
+    .section-promo-1{
+
+        display: flex; //расположение по горизонтали
+        width: 1173px;
+        height: 554px;
+        margin: 0 auto;
+        
+        &__content,
+        &__video{
+            flex-basis: 50%;//для того, что бы они были одинаковой ширины
+        }
+
+        &__content{
+
+            padding-right: 53px;
+
+            .title{
+                font-size: 36px;
+                line-height: 51px;
+                font-weight: bold;
+                padding-bottom: 26px;
+                width: 515px;
+            }
+            
+            .desription-item{
+                margin-top: 28px;
+            }
+
+        &__video{
+            img{
+                padding-top: 25px;
+                width: 100%; //вытягиваем на всю ширину
+                height: auto; // автоматически подстраивается под ширину
+                }
+
+            }                
+        }
+
+    }
+    
+
+    .section-promo-2{
+        display: flex;
+        padding-top: 86px;
+        border-top: 1px solid #e2e2e2;
+        text-align: center;
+        width: 1250px;
+        margin: 0 auto;
+        
+        .desription-item__item{
+            width: 387px;
+            margin: 0 auto;
+            
+        }
+       .desription-item + .desription-item{
+            margin-left: 50px;
+        }
+    }
+
+    
+}
+
+//-- / promo -->
+
+//-- founder -->
+
+.section-founder{
+    margin-top: 132px;
+    margin-bottom: 117px;
+    display: flex;
+    background-color: #F6FAFD;
+    height: 690px;
+
+    .section-inner{
+        display: flex;
+
+
+    }
+
+    &__img{
+        align-self: flex-end;
+    }
+
+    &__content{
+        align-self: center;
+        padding-left: 50px;
+
+        &-text{
+            @include font-mont;
+            font-size: 24px;
+            line-height: 40px;
+        }
+
+        &-name{
+            font-size: 24px;
+            line-height: 29px;
+            font-weight: bold;
+            padding-top: 23px;
+        }
+
+        &-post{
+            font-size: 20px;
+            line-height: 28px;
+        }
+    }
+
+
+}
+
+
+//-- founder -->
+
+//-- plans -->
+
+.section-plans{
+    padding-top: 60px;
+    padding-bottom: 120px;
+    text-align: center;
+
+
+    &__title{
+            font-size: 36px;
+            line-height: 51px;
+            font-weight: bold;
+            padding-bottom: 17px;
+    }
+    &__subtitle{
+            font-size: 16px;
+            line-height: 21px;
+            font-weight: 300;
+            color: #6C6C6C;
+            width: 50%;
+            margin: 0 auto 80px
+    }
+    &__list{
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+
+
+        &-item{
+            flex-basis: 370px; // размер блоков вместо width
+            padding: 60px 45px;
+
+            &_title{
+                font-size: 14px;
+                line-height: 17px;
+                font-weight: bold;
+                text-transform: uppercase;
+                
+            }
+    
+            &_price{
+                margin-bottom: 26px;
+
+                .prefix{
+                    color: #FE4FA7;
+                    font-size: 72px;
+                    line-height: 86px;
+                    font-weight: bold;
+                }
+                .postfix{
+                    font-size: 14px;
+                    line-height: 17px;
+                    font-weight: bold;
+                }
+    
+            }
+    
+            &_description{
+                font-size: 16px;
+                line-height: 28px;
+                font-weight: 300;
+                margin-bottom: 50px;
+    
+            }
+    
+            &_button{
+                
+            }
+
+            &.active {
+                background-color: #F6FAFD;
+            }
+        }
+        
+    }
+}
+
+//-- /plans -->
+
+//-- Free -->
+.section-free{
+    text-align: center;
+    color: #ffffff;
+    background: linear-gradient(to right, #fe985b, #fe4fa7);
+    padding-top: 120px;
+    padding-bottom: 120px;
+
+   &__title{
+    font-size: 55px;
+    line-height: 60px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 28px;
+   }
+   &__description{
+    @include font-mont;
+    font-size: 20px;
+    line-height: 30px;
+    color: #ffffff;
+    width: 50%;
+    margin: 0 auto 40px;
+   }
+   &__button{
+
+   }
+}
+
+
+//-- /Free -->
+
+//-- footer -->
+
+.section-footer{
+    padding-top: 86px;
+    padding-bottom: 120px;
+
+    &__logo{
+        text-align: center;
+        font-size: 24px;
+        line-height: 29px;
+        font-weight: bold;
+        margin-bottom: 30px;
+    }
+    &__nav{
+        display: flex;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+        list-style: none; //избавляемся от собственных отступов в списках
+    
+        
+
+        li {
+            margin-left: 60px;
+            &:first-child{
+                margin: 0;  // связка li + li не работает, пришлось сделать этот костыль ^.^
+            }
+            margin-bottom: 30px;
+            a {
+                font-size: 14px;
+                line-height: 20px;
+                font-weight: bold;
+                text-transform: uppercase;
+                color: #464646;
+                text-decoration: none;
+                transition: .2s;
+                cursor: pointer;
+
+                &.active,
+                &:hover{
+                    color: #FE50A6; 
+
+                }
+
+
+            }
+        }
+    }    
+    &__nav-helper{
+        display: flex;
+        justify-content: center;
+        margin: 0 0 20px;
+        padding: 0;
+        list-style: none; //избавляемся от собственных отступов в списках
+
+        
+
+        li {
+            margin-left: 10px;
+            &:first-child{
+                margin: 0;  // связка li + li не работает, пришлось сделать этот костыль ^.^
+            }
+
+            a {
+                color: #464646;
+                text-decoration: none;
+                transition: .2s;
+                cursor: pointer;
+               
+                &.active,
+                &:hover{
+                    color: #FE50A6;
+                }
+
+            }
+        }
+    }    
+
+    &__copyright{
+        display: flex;
+        justify-content: space-between;
+        font-size: 14px;
+        line-height: 18px;
+        @include font-mont;
+        text-decoration: none;
+        width: 60%;
+        margin: 0 auto;
+
+        &-copy{
+            text-decoration: none;
+        }
+    }
+}
+
+
+.helper_links{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    
+    
+
+
+    li {
+        margin-left: 20px;
+        &:first-child{
+            margin: 0;  // связка li + li не работает, пришлось сделать этот костыль ^.^
+        }
+        a {
+            color: #464646;
+            text-decoration: none;
+            cursor: pointer;
+
+            &:hover{
+                text-decoration: underline;
+            }
+        }
+
+
+    }
+}
+
+
+//-- /footer -->
