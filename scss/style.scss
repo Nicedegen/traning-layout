@@ -33,9 +33,12 @@ body{
     color: #414141;
 }
 
-.section-outer{}
+.section-outer{
+    padding-right: 20px; //что бы не прилипало по краем при изменения размера 
+    padding-left: 20px;
+}
 .section-inner{
-    width: 1180px;
+    max-width: 1180px; //задаем максимальную ширину для адаптива
     margin: 0 auto;
 }
 
@@ -88,6 +91,17 @@ body{
     background: #ffffff;
     color: #414141;
 }    
+
+
+ $screen-sm: 576px;
+ $screen-md: 768px;
+ $screen-lg: 992px;
+ $screen-xl: 1200px;
+
+ $screen-xs-max: 575px;
+ $screen-sm-max: 767px; //расширяем свойства, для того, что бы небыло переопределений медиа запросов
+ $screen-md-max: 991px;
+ $screen-lg-max: 1199px;
 
 
 // === /Common ===
@@ -154,7 +168,7 @@ body{
 
             &-input{
                 flex: 1; 
-                padding-right: 40px;
+                
                 input{
                     margin: 0;
                     padding: 20px 16px;
@@ -178,6 +192,31 @@ body{
 
                 }
             }
+
+            @media (max-width: $screen-xs-max){
+                flex-direction: column;
+
+                &-button{
+                    flex: 1;
+
+                    .btn-main{
+                        width: 100%;
+                    }
+                }
+
+                &-input{
+                    margin-bottom: 10px;
+                }
+                
+            }
+    
+            @media (min-width: $screen-sm){
+                &-input{
+                    padding-right: 40px;
+                }
+                
+            }
+
         }
     }
 }
@@ -191,8 +230,7 @@ body{
     .section-promo-1{
 
         display: flex; //расположение по горизонтали
-        width: 1173px;
-        height: 554px;
+        max-width: 1173px;
         margin: 0 auto;
         
         &__content,
@@ -202,30 +240,55 @@ body{
 
         &__content{
 
-            padding-right: 53px;
+            
 
             .title{
                 font-size: 36px;
                 line-height: 51px;
                 font-weight: bold;
                 padding-bottom: 26px;
-                width: 515px;
+                max-width: 515px;
             }
             
             .desription-item{
                 margin-top: 28px;
             }
 
+        }    
         &__video{
-            img{
                 padding-top: 25px;
                 width: 100%; //вытягиваем на всю ширину
                 height: auto; // автоматически подстраивается под ширину
+
+                .video{
+                    width: 100%;
+                    height: auto;
                 }
+                
 
-            }                
+            }
+                            
+        
+
+        @media (max-width: $screen-sm-max){
+            flex-direction: column; //разворачиваем в колонку для адаптива
+        
+            &__video{
+            order: -1; //что бы видео было первое в колонке
+            margin-bottom: 20px;
+            }
+
+            .desription-item{
+                &__text{
+                width: 50%
+            }
         }
-
+        }
+        @media (min-width: $screen-md){
+            &__content{
+                padding-right: 90px;
+            }
+        }
     }
     
 
@@ -234,20 +297,30 @@ body{
         padding-top: 86px;
         border-top: 1px solid #e2e2e2;
         text-align: center;
-        width: 1250px;
         margin: 0 auto;
+        margin-top: 120px;
         
         .desription-item__item{
-            width: 387px;
+            max-width: 387px;
             margin: 0 auto;
-            
         }
-       .desription-item + .desription-item{
-            margin-left: 50px;
-        }
-    }
+       
 
+
+        @media (max-width: $screen-xs-max){
+            flex-direction: column;
+            .desription-item__item + .desription-item__item{
+                margin-top: 50px;
+            }
+        }
+
+        @media (min-width: $screen-sm){
+            .desription-item__item + .desription-item__item{
+                margin-left: 40px;
+            }
+        }
     
+    }
 }
 
 //-- / promo -->
@@ -259,7 +332,8 @@ body{
     margin-bottom: 117px;
     display: flex;
     background-color: #F6FAFD;
-    height: 690px;
+    
+    
 
     .section-inner{
         display: flex;
@@ -267,34 +341,63 @@ body{
 
     }
 
-    &__img{
-        align-self: flex-end;
-    }
+    
+        
+        
+    
 
     &__content{
-        align-self: center;
-        padding-left: 50px;
 
         &-text{
             @include font-mont;
-            font-size: 24px;
+            font-size: 25px;
             line-height: 40px;
         }
 
         &-name{
-            font-size: 24px;
+            font-size: 25px;
             line-height: 29px;
             font-weight: bold;
             padding-top: 23px;
         }
 
         &-post{
-            font-size: 20px;
+            font-size: 21px;
             line-height: 28px;
         }
     }
 
+    
 
+    @media (max-width: $screen-sm-max){
+        .section-inner{
+            flex-direction: column;
+        }
+
+        &__content{
+            order: -1;
+            margin-bottom: 40px;
+        }
+
+        &__img{
+            img{
+                max-width: 100%;
+            }
+        }    
+      
+    }
+
+    @media (min-width: $screen-md){
+        &__img{
+            align-self: flex-end; //центрируем на маленьких девайсах
+
+        }
+
+        &__content{
+            align-self: center;
+            padding-left: 50px;
+        }
+    }
 }
 
 
@@ -319,8 +422,7 @@ body{
             line-height: 21px;
             font-weight: 300;
             color: #6C6C6C;
-            width: 50%;
-            margin: 0 auto 80px
+            margin-bottom: 80px;
     }
     &__list{
         display: flex;
@@ -373,8 +475,25 @@ body{
                 background-color: #F6FAFD;
             }
         }
+
+        @media (max-width: $screen-xs-max){
+            flex-direction: column;
+        }
         
     }
+
+    
+
+    @media (min-width: $screen-sm){
+        &__subtitle{
+            width: 50%;
+            margin-left: auto;
+            margin-right: auto;
+            
+    }
+    }
+
+
 }
 
 //-- /plans -->
@@ -399,12 +518,19 @@ body{
     font-size: 20px;
     line-height: 30px;
     color: #ffffff;
-    width: 50%;
     margin: 0 auto 40px;
    }
    &__button{
 
    }
+
+    @media (min-width: $screen-lg){
+        &__description {
+            width: 50%; // ограничиваем ширину только до этого размера. Далее растягивается на всю ширину блока.
+        }
+}
+
+
 }
 
 
@@ -433,11 +559,10 @@ body{
         
 
         li {
-            margin-left: 60px;
-            &:first-child{
-                margin: 0;  // связка li + li не работает, пришлось сделать этот костыль ^.^
+
+            & + li{
+                margin-left: 30px;
             }
-            margin-bottom: 30px;
             a {
                 font-size: 14px;
                 line-height: 20px;
@@ -457,7 +582,29 @@ body{
 
             }
         }
-    }    
+
+        @media (max-width: $screen-xs-max){
+            flex-direction: column;
+            text-align: center;
+            li {
+                margin-left: 0 !important;
+                &:first-child{
+                    
+                    margin-top: 15px;
+                }
+                margin-bottom: 10px;
+            }
+        }
+
+        @media (min-width: $screen-sm){
+            li {
+                &:first-child{
+                    margin-bottom: 60px;
+                }
+            }
+        }   
+    
+    }
     &__nav-helper{
         display: flex;
         justify-content: center;
@@ -495,30 +642,36 @@ body{
         line-height: 18px;
         @include font-mont;
         text-decoration: none;
-        width: 60%;
-        margin: 0 auto;
+        
 
         &-copy{
             text-decoration: none;
         }
+
+        @media (min-width: $screen-md){
+                width: 60%;
+                margin: 0 auto;
+        }
+
+        @media (max-width: $screen-sm-max){
+            flex-direction: column;
+            text-align: center;
+        }
+
     }
-}
-
-
-.helper_links{
+    .helper_links{
     margin: 0;
     padding: 0;
     list-style: none;
-    display: flex;
-    
+    display: flex;    
     
 
 
     li {
         margin-left: 20px;
-        &:first-child{
-            margin: 0;  // связка li + li не работает, пришлось сделать этот костыль ^.^
-        }
+        // &:first-child{
+        //     margin: 0;  // связка li + li не работает, пришлось сделать этот костыль ^.^
+        // }
         a {
             color: #464646;
             text-decoration: none;
@@ -530,8 +683,19 @@ body{
         }
 
 
-    }
-}
+    
 
+        @media (max-width: $screen-sm-max){
+            display: inline-flex;
+            margin-top: 20px;
+        }
+
+        @media (min-width: $screen-md){
+            display: inline-block;
+        }
+    }
+
+}
+}
 
 //-- /footer -->
